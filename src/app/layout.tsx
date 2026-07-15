@@ -29,7 +29,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      suppressHydrationWarning // থিম পরিবর্তনের সময় হাইড্রেশন ওয়ার্নিং বন্ধ করার জন্য এটি অত্যন্ত জরুরি
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider

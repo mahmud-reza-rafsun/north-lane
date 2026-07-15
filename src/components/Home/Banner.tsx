@@ -81,9 +81,7 @@ export default function Banner() {
         <section
             aria-roledescription="carousel"
             aria-label="Featured collections"
-            className="relative h-[92vh] min-h-[560px] w-full overflow-hidden bg-[#F3F1ED] text-[#17171A] dark:bg-[#0F0F10] dark:text-[#F5F4F1]"
-        >
-            {/* keyframe animation inject করার জন্য একটি ছোট ইনলাইন স্টাইল ব্লক (Next.js ফ্রেন্ডলি) */}
+            className="relative h-[92vh] min-h-[560px] w-full overflow-hidden bg-[#F3F1ED] text-[#17171A] dark:bg-[#0F0F10] dark:text-[#F5F4F1]">
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @keyframes hero-rail-fill {
@@ -123,7 +121,6 @@ export default function Banner() {
                                 sizes="100vw"
                                 className="object-cover"
                             />
-                            {/* Readability scrim — deliberately asymmetric */}
                             <div
                                 className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent
                                            dark:from-black/70 dark:via-black/35 dark:to-black/10"

@@ -1,24 +1,16 @@
-// components/cart-drawer.tsx
 "use client";
 
 import { useEffect } from "react";
 import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { CartItem } from "@/utils/types/card";
+import { CartDrawerProps } from "@/utils/types/card-props.interface";
 
-interface CartDrawerProps {
-    isOpen: boolean;
-    onClose: () => void;
-    items: CartItem[];
-    onUpdateQuantity: (id: string, newQty: number) => void;
-    onRemoveItem: (id: string) => void;
-}
+
 
 export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveItem }: CartDrawerProps) {
     const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-    // কার্ট ওপেন থাকলে ব্যাকগ্রাউন্ড স্ক্রল লক করা
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
@@ -88,10 +80,7 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
                                         >
                                             {/* Product Image */}
                                             <div className="relative h-24 w-18 overflow-hidden rounded bg-neutral-100 dark:bg-neutral-900">
-                                                {/* 
-                          রিয়েল প্রোজেক্টে সঠিক ছবির সোর্স দিতে হবে, 
-                          এখানে আমরা মক প্লেসহোল্ডার হিসেবে ব্যবাহার করছি
-                        */}
+
                                                 <div className="absolute inset-0 bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
                                                 <Image
                                                     src={item.image}

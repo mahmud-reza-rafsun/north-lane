@@ -36,14 +36,13 @@ export default function Navbar() {
 
     return (
         <>
-            <header
-                className={`fixed top-0 left-0 right-0 z-40 w-full transition-all duration-500 ${isScrolled
-                    ? "border-b border-neutral-200/50 bg-[#F5F4F1]/90 py-3.5 backdrop-blur-md dark:border-neutral-900/80 dark:bg-[#0F0F10]/90"
-                    : "bg-transparent py-5"
-                    }`}
-            >
-                <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-12">
-
+            <header className="fixed top-0 left-0 right-0 z-40 w-full py-5">
+                <div
+                    className={`mx-auto flex max-w-7xl items-center bg-[#F5F4F1]/70 backdrop-blur-md justify-between px-6 py-3.5 lg:px-12 rounded-full transition-all duration-500 ${isScrolled
+                        ? "border border-neutral-200/40 bg-[#F5F4F1]/70 backdrop-blur-md shadow-sm dark:border-neutral-900/60 dark:bg-[#0F0F10]/70"
+                        : "border border-transparent bg-transparent"
+                        }`}
+                >
                     {/* Brand Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
                         <svg
@@ -104,28 +103,28 @@ export default function Navbar() {
                             {isMobileMenuOpen ? <X className="h-[18px] w-[18px]" /> : <Menu className="h-[18px] w-[18px]" />}
                         </button>
                     </div>
-                </div>
 
-                {/* Mobile Navigation Menu */}
-                {isMobileMenuOpen && (
-                    <div className="absolute left-0 right-0 top-full border-b border-neutral-200/60 bg-[#F5F4F1] px-6 py-6 shadow-lg md:hidden dark:border-neutral-900 dark:bg-[#0F0F10]">
-                        <nav className="flex flex-col gap-5">
-                            {["Home", "Products", "About Us"].map((link) => {
-                                const href = link === "Home" ? "/" : `/${link.toLowerCase().replace(" ", "-")}`;
-                                return (
-                                    <Link
-                                        key={link}
-                                        href={href}
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                        className="text-sm font-medium uppercase tracking-widest text-neutral-700 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-neutral-50"
-                                    >
-                                        {link}
-                                    </Link>
-                                );
-                            })}
-                        </nav>
-                    </div>
-                )}
+                    {/* Mobile Navigation Menu */}
+                    {isMobileMenuOpen && (
+                        <div className="absolute left-6 right-6 top-full mt-2 rounded-2xl border border-neutral-200/60 bg-[#F5F4F1]/95 px-6 py-6 shadow-lg md:hidden backdrop-blur-md dark:border-neutral-900 dark:bg-[#0F0F10]/95">
+                            <nav className="flex flex-col gap-5">
+                                {["Home", "Products", "About Us"].map((link) => {
+                                    const href = link === "Home" ? "/" : `/${link.toLowerCase().replace(" ", "-")}`;
+                                    return (
+                                        <Link
+                                            key={link}
+                                            href={href}
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            className="text-sm font-medium uppercase tracking-widest text-neutral-700 hover:text-neutral-950 dark:text-neutral-300 dark:hover:text-neutral-50"
+                                        >
+                                            {link}
+                                        </Link>
+                                    );
+                                })}
+                            </nav>
+                        </div>
+                    )}
+                </div>
             </header>
 
             <CartDrawer
