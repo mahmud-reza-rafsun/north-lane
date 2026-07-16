@@ -1,145 +1,162 @@
 # 🏛️ North Lane — Premium Clothing & Fashion Brand
 
-North Lane is a modern and premium fashion and clothing e-commerce platform. It is designed with a clean aesthetic, excellent user experience, and built using the latest web technologies. The project utilizes the **Bun** runtime environment for optimal development speed and performance.
+North Lane is a modern and premium fashion e-commerce application built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. The project focuses on delivering a clean shopping experience with a minimalist design, responsive layout, dark mode support, and a smooth user interface.
+
+## 🌐 Live Demo
+
+👉 https://north-lane.vercel.app
+
+## 📦 GitHub Repository
+
+👉 https://github.com/mahmud-reza-rafsun/north-lane
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-- **Modern Architecture**: Modern folder structure based on Next.js App Router.
-- **Shopping Cart**: Fully functional shopping cart system powered by `CartContext` including a Cart Drawer.
-- **Dynamic Routing**: Dynamic product details page for each individual item (`/products/[id]`).
-- **Elegant UI Elements**: Custom buttons, select options, and toast notifications based on Shadcn/ui and `sonner`.
-- **Dark & Light Mode**: Smooth theme toggling built with `next-themes`.
-- **Blazing Fast**: Optimized package management and execution runtime using **Bun**.
+* 🛍️ Modern fashion e-commerce UI
+* 🛒 Shopping Cart with React Context API
+* 📂 Dynamic Product Details (`/products/[id]`)
+* 🌙 Dark & Light Mode using `next-themes`
+* 🎨 Beautiful UI built with Shadcn UI
+* 🔔 Toast Notifications with Sonner
+* 📱 Fully Responsive Design
+* ⚡ Built with Next.js App Router
+* 🚀 Supports Bun, npm, and pnpm
 
 ---
 
-## 📂 Project Structure
+# 🛠️ Tech Stack
 
-The complete architecture of the project is listed below:
+* **Framework:** Next.js
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **UI Library:** Shadcn UI
+* **Icons:** Lucide React
+* **State Management:** React Context API
+* **Theme:** next-themes
+* **Notifications:** Sonner
+
+---
+
+# 📂 Project Structure
 
 ```text
-├── .next/
-├── node_modules/
-├── public/
-├── src/
-│   ├── app/
-│   │   ├── about-us/
-│   │   │   └── page.tsx
-│   │   ├── products/
-│   │   │   ├── _components/
-│   │   │   │   └── DetailsProduct.tsx
-│   │   │   └── [id]/
-│   │   │       └── page.tsx
-│   │   │   └── page.tsx
-│   │   ├── favicon.ico
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── components/
-│   │   ├── Home/
-│   │   │   ├── AboutStory.tsx
-│   │   │   ├── Banner.tsx
-│   │   │   ├── EditorialCampaign.tsx
-│   │   │   └── ProductCard.tsx
-│   │   ├── layout/
-│   │   │   ├── cart-drawer.tsx
-│   │   │   ├── Footer.tsx
-│   │   │   └── Navbar.tsx
-│   │   ├── provider/
-│   │   │   ├── app-toaster.tsx
-│   │   │   ├── ModeToggle.tsx
-│   │   │   └── theme-provider.tsx
-│   │   └── ui/
-│   │       ├── Button.tsx
-│   │       ├── icon.tsx
-│   │       ├── select.tsx
-│   │       └── sonner.tsx
-│   ├── context/
-│   │   └── CartContext.tsx
-│   ├── lib/
-│   ├── types/
-│   └── utils/
-│       ├── campaign.ts
-│       ├── dummyData.ts
-│       ├── footerData.ts
-│       ├── milestone.ts
-│       └── side.ts
-├── .gitignore
-├── bun.lock
-├── components.json
-├── eslint.config.mjs
-├── next-env.d.ts
-├── next.config.ts
-├── package.json
-├── postcss.config.mjs
-├── README.md
-└── tsconfig.json
-
+src
+├── app
+│   ├── about-us
+│   ├── products
+│   │   ├── _components
+│   │   └── [id]
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components
+│   ├── Home
+│   ├── layout
+│   ├── provider
+│   └── ui
+│
+├── context
+├── lib
+├── types
+└── utils
 ```
 
 ---
 
-## 🚀 Getting Started
+# 🚀 Getting Started
 
-Follow these steps to run the project locally. The use of **Bun** is required for this project.
-
-### Prerequisites
-
-Ensure you have **Bun** installed on your system. If not, install it using the command below:
+Clone the repository:
 
 ```bash
-curl -fsSL [https://bun.sh/install](https://bun.sh/install) | bash
-
+git clone https://github.com/mahmud-reza-rafsun/north-lane.git
 ```
 
-For Windows users (PowerShell):
-
-```bash
-powershell -c "irm bun.sh/install.ps1 | iex"
-
-```
-
-### Installation
-
-1. Navigate to the project directory:
+Move into the project directory:
 
 ```bash
 cd north-lane
-
 ```
-
-2. Install the necessary dependencies:
-
-```bash
-bun install
-
-```
-
-### Run the Development Server
-
-Start the local development server with the following command:
-
-```bash
-bun dev
-
-```
-
-Open https://north-lane.vercel.app in your browser to view the application.
 
 ---
 
-## 🛠️ Tech Stack Used
+## Install Dependencies
 
-* **Framework**: Next.js
-* **Language**: TypeScript
-* **Styling**: Tailwind CSS
-* **UI**: Shadcn UI
-* **Icons**: Lucide React
-* **Package Manager & Runtime**: Bun
-* **State Management**: React Context API
+### Using Bun
 
+```bash
+bun install
 ```
 
+### Using npm
+
+```bash
+npm install
 ```
+
+### Using pnpm
+
+```bash
+pnpm install
+```
+
+---
+
+## Run the Development Server
+
+### Bun
+
+```bash
+bun dev
+```
+
+### npm
+
+```bash
+npm run dev
+```
+
+### pnpm
+
+```bash
+pnpm dev
+```
+
+Visit:
+
+```
+http://localhost:3000
+```
+
+---
+
+# 📦 Build for Production
+
+### Bun
+
+```bash
+bun run build
+bun start
+```
+
+### npm
+
+```bash
+npm run build
+npm start
+```
+
+### pnpm
+
+```bash
+pnpm build
+pnpm start
+```
+
+---
+
+# 📄 License
+
+This project is created for learning and portfolio purposes.
