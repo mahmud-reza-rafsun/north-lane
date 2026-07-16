@@ -94,9 +94,15 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
                                                             ৳{(item.price * item.quantity).toLocaleString()}
                                                         </span>
                                                     </div>
-                                                    <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-                                                        {item.colors} / Size {item.sizes}
-                                                    </p>
+
+                                                    <div className="mt-1 flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+                                                        <span
+                                                            className="inline-block h-3.5 w-3.5 rounded-full border border-black/10 dark:border-white/10 shadow-sm shrink-0"
+                                                            style={{
+                                                                backgroundColor: Array.isArray(item.colors) ? item.colors[0] : item.colors
+                                                            }} />
+                                                        <span>Size {item.sizes}</span>
+                                                    </div>
                                                 </div>
 
                                                 <div className="flex items-center justify-between">

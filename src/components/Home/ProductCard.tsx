@@ -135,7 +135,7 @@ export default function ProductListing() {
                         </div>
                     ))
                 ) : filteredProducts.length > 0 ? (
-                    filteredProducts.map((product) => (
+                    filteredProducts.slice(0, 8).map((product) => (
                         <Link
                             key={product.id}
                             href={`/products/${product.id}`}
