@@ -28,9 +28,9 @@ export default function Navbar() {
         <>
             <header className="fixed top-0 left-0 right-0 z-40 w-full py-5">
                 <div
-                    className={`mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5 lg:px-12 rounded-full transition-all duration-500 ${isScrolled
-                            ? "border border-neutral-200/50 bg-[#F5F4F1]/80 backdrop-blur-sm shadow-sm dark:border-neutral-800/50 dark:bg-gray-800"
-                            : "border border-transparent bg-[#F5F4F1]/40 backdrop-blur-3xl dark:bg-[#0F0F10]/40"
+                    className={`mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5 lg:px-12 md:rounded-full sm:rounded-none transition-all duration-500 ${isScrolled
+                        ? "border border-neutral-200/50 bg-[#F5F4F1]/80 backdrop-blur-sm shadow-sm dark:border-neutral-800/50 dark:bg-gray-800"
+                        : "border border-transparent bg-[#F5F4F1]/40 backdrop-blur-3xl dark:bg-[#0F0F10]/40"
                         }`}
                 >
                     <Link href="/" className="flex items-center gap-2 group">
@@ -69,7 +69,7 @@ export default function Navbar() {
 
                         <button
                             onClick={() => setIsCartOpen(true)}
-                            className="relative flex h-9 w-9 items-center cursor-pointer justify-center rounded-full border border-neutral-200 bg-transparent text-neutral-900 transition-colors duration-300 hover:bg-neutral-900/5 dark:border-neutral-100 dark:text-neutral-50 dark:hover:bg-white/5"
+                            className="relative flex h-9 w-9 items-center cursor-pointer justify-center rounded-full border border-neutral-200 bg-transparent text-neutral-900 transition-colors duration-300 hover:bg-neutral-900/5 dark:border-neutral-400 dark:text-neutral-50 dark:hover:bg-white/5"
                             aria-label="Open shopping cart"
                         >
                             <ShoppingBag className="h-[18px] w-[18px]" />
@@ -82,7 +82,7 @@ export default function Navbar() {
 
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="flex cursor-pointer h-9 w-9 items-center justify-center rounded-full border border-neutral-200 bg-transparent text-neutral-900 transition-colors duration-300 hover:bg-neutral-900/5 md:hidden dark:border-neutral-800 dark:text-neutral-50 dark:hover:bg-white/5"
+                            className="flex cursor-pointer h-9 w-9 items-center justify-center rounded-full border border-neutral-200 bg-transparent text-neutral-900 transition-colors duration-300 hover:bg-neutral-900/5 md:hidden dark:border-neutral-400 dark:text-neutral-50 dark:hover:bg-white/5"
                             aria-label="Toggle menu"
                         >
                             {isMobileMenuOpen ? <X className="h-[18px] w-[18px]" /> : <Menu className="h-[18px] w-[18px]" />}

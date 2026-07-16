@@ -1,12 +1,16 @@
+import AboutStory from "@/components/Home/AboutStory";
 import Banner from "@/components/Home/Banner";
-import ProductListing from "@/components/Home/ProductListing";
+import EditorialCampaign from "@/components/Home/EditorialCampaign";
+import ProductCard from "@/components/Home/ProductCard";
 
 
 export default function Home() {
   return (
     <>
       <Banner />
-      <ProductListing />
+      <ProductCard />
+      <EditorialCampaign />
+      <AboutStory />
     </>
   );
 }

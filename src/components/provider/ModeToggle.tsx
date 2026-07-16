@@ -30,13 +30,10 @@ export function ModeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            className="relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-neutral-200 bg-transparent text-neutral-800 transition-colors duration-300 hover:bg-neutral-100 dark:border-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-900/50"
-            title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-        >
-            {/* Sun Icon */}
-            <Sun className="h-[18px] w-[18px] scale-100 rotate-0 transition-all duration-300 dark:scale-0 dark:-rotate-90" />
+            className="relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-neutral-200 bg-transparent text-neutral-800 transition-colors duration-300 hover:bg-neutral-100 dark:border-neutral-400 dark:text-neutral-200 dark:hover:bg-neutral-900/50"
+            title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}>
 
-            {/* Moon Icon */}
+            <Sun className="h-[18px] w-[18px] scale-100 rotate-0 transition-all duration-300 dark:scale-0 dark:-rotate-90" />
             <Moon className="absolute h-[18px] w-[18px] scale-0 rotate-90 transition-all duration-300 dark:scale-100 dark:rotate-0" />
 
             <span className="sr-only">Toggle theme</span>

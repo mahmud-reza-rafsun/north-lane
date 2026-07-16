@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Shield, Sparkles, Sprout, ArrowRight } from "lucide-react";
 import Link from "next/link";
 

@@ -18,7 +18,7 @@ import {
 import Image from "next/image";
 import { toast } from "sonner";
 
-export default function ProductListing({ onSelectProduct }: { onSelectProduct: (p: Product) => void }) {
+export default function ProductPage({ onSelectProduct }: { onSelectProduct: (p: Product) => void }) {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
