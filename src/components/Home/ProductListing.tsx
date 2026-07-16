@@ -6,6 +6,7 @@ import { Search, SlidersHorizontal, ArrowUpDown } from "lucide-react";
 import { Product } from "@/types/product";
 import { DUMMY_PRODUCTS } from "@/utils/dummyData";
 import { useCart } from "@/context/CartContext";
+import { toast } from "sonner";
 
 export default function ProductListing() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -51,7 +52,7 @@ export default function ProductListing() {
         e.stopPropagation();
 
         addToCart(product);
-        alert(`${product.name} has been added to your cart!`);
+        toast.success(`${product.name} has been added to your cart!`);
     };
 
     return (

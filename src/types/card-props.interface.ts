@@ -1,4 +1,4 @@
-import { CartItem } from "./card";
+import { CartItem } from "@/context/CartContext";
 
 export interface CartDrawerProps {
     isOpen: boolean;

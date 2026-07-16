@@ -2,20 +2,20 @@
 
 import { useState, useEffect } from "react";
 import { Search, SlidersHorizontal, ArrowUpDown } from "lucide-react";
-import { Product } from "@/types/product";
 import { DUMMY_PRODUCTS } from "@/utils/dummyData";
 import Link from "next/link";
+import { useCart } from "@/context/CartContext";
+import { Product } from "@/types/product";
 
 export default function ProductListing({ onSelectProduct }: { onSelectProduct: (p: Product) => void }) {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
-
-    // Filters States
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [sortBy, setSortBy] = useState("default");
 
-    // Initial Loading Skeleton Simulation
+    const { addToCart } = useCart();
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setProducts(DUMMY_PRODUCTS);
@@ -24,10 +24,8 @@ export default function ProductListing({ onSelectProduct }: { onSelectProduct: (
         return () => clearTimeout(timer);
     }, []);
 
-    // Extract unique categories for right filter dropdown
     const categories = ["All", ...new Set(DUMMY_PRODUCTS.map(p => p.category))];
 
-    // Filter and Sort Logic
     const filteredProducts = products
         .filter(product => {
             const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -38,22 +36,20 @@ export default function ProductListing({ onSelectProduct }: { onSelectProduct: (
         .sort((a, b) => {
             if (sortBy === "price-low") return a.price - b.price;
             if (sortBy === "price-high") return b.price - a.price;
-            return 0; // Default
+            return 0;
         });
 
-    // Add to Cart handler
-    const handleAddToCart = (e: React.MouseEvent, product: Product) => {
-        e.stopPropagation();
-        console.log("Added to cart:", product);
+    const handleAddToCart = (product: Product) => {
+        addToCart({
+            ...product,
+            sizes: [product.sizes?.[0] || "M"],
+            colors: [product.colors?.[0] || "Default"]
+        });
     };
 
     return (
         <section className="w-full bg-[#F3F1ED] text-[#17171A] dark:bg-[#0F0F10] dark:text-[#F5F4F1] px-6 sm:px-10 md:px-16 lg:px-24 py-28 transition-colors duration-300">
-
-            {/* Filter and Control Bar */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#17171A]/10 dark:border-[#F5F4F1]/10 pb-6 mb-10">
-
-                {/* Left Side: Search Bar */}
                 <div className="relative w-full md:max-w-xs">
                     <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#17171A]/40 dark:text-[#F5F4F1]/40" />
                     <input
@@ -65,10 +61,7 @@ export default function ProductListing({ onSelectProduct }: { onSelectProduct: (
                     />
                 </div>
 
-                {/* Right Side: Category Filters & Sort By Price */}
                 <div className="flex flex-wrap items-center gap-3 w-full md:w-auto md:justify-end">
-
-                    {/* Category Filter */}
                     <div className="relative flex items-center gap-2">
                         <SlidersHorizontal className="h-4 w-4 text-[#17171A]/60 dark:text-[#F5F4F1]/60" />
                         <select
@@ -82,7 +75,6 @@ export default function ProductListing({ onSelectProduct }: { onSelectProduct: (
                         </select>
                     </div>
 
-                    {/* Price Sort */}
                     <div className="relative flex items-center gap-2">
                         <ArrowUpDown className="h-4 w-4 text-[#17171A]/60 dark:text-[#F5F4F1]/60" />
                         <select
@@ -98,10 +90,8 @@ export default function ProductListing({ onSelectProduct }: { onSelectProduct: (
                 </div>
             </div>
 
-            {/* Product Grid Layout */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
                 {loading ? (
-                    // 4 Skeleton Cards Loading State
                     Array.from({ length: 4 }).map((_, i) => (
                         <div key={i} className="animate-pulse flex flex-col gap-4">
                             <div className="aspect-[3/4] w-full bg-[#17171A]/5 dark:bg-[#F5F4F1]/5 rounded-2xl" />
@@ -112,48 +102,43 @@ export default function ProductListing({ onSelectProduct }: { onSelectProduct: (
                     ))
                 ) : filteredProducts.length > 0 ? (
                     filteredProducts.map((product) => (
-                        <Link
-                            key={product.id}
-                            href={`/products/${product.id}`}
-                            className="group flex flex-col cursor-pointer transition-all duration-300"
-                        >
-                            {/* Product Image Container */}
-                            <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#17171A]/5 dark:bg-[#F5F4F1]/5 rounded-2xl mb-4">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                                />
-                            </div>
-
-                            {/* Product Meta Info */}
-                            <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#17171A]/50 dark:text-[#F5F4F1]/50 mb-1">
-                                {product.category}
-                            </span>
-                            <h3 className="font-sans text-base font-medium text-[#17171A] dark:text-[#F5F4F1] mb-1 group-hover:text-[#C7A874] transition-colors">
-                                {product.name}
-                            </h3>
-                            <p className="font-sans text-sm font-semibold text-[#17171A]/80 dark:text-[#F5F4F1]/80 mb-4">
-                                ${product.price.toLocaleString()}
-                            </p>
-
-                            {/* Action Buttons: Responsive Layout Fix */}
-                            <div className="mt-auto flex flex-col sm:flex-row gap-2 w-full">
-                                <div className="w-full text-center bg-transparent border border-[#17171A]/20 text-[#17171A] dark:border-[#F5F4F1]/20 dark:text-[#F5F4F1] font-sans text-xs font-semibold py-2.5 rounded-full transition-colors hover:border-[#17171A] dark:hover:border-[#F5F4F1]">
-                                    View Details
+                        <div key={product.id} className="group flex flex-col transition-all duration-300">
+                            <Link href={`/products/${product.id}`} className="flex flex-col">
+                                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#17171A]/5 dark:bg-[#F5F4F1]/5 rounded-2xl mb-4">
+                                    <img
+                                        src={product.image}
+                                        alt={product.name}
+                                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                    />
                                 </div>
+                                <span className="text-[10px] font-medium tracking-[0.2em] uppercase text-[#17171A]/50 dark:text-[#F5F4F1]/50 mb-1">
+                                    {product.category}
+                                </span>
+                                <h3 className="font-sans text-base font-medium text-[#17171A] dark:text-[#F5F4F1] mb-1 group-hover:text-[#C7A874] transition-colors">
+                                    {product.name}
+                                </h3>
+                                <p className="font-sans text-sm font-semibold text-[#17171A]/80 dark:text-[#F5F4F1]/80 mb-4">
+                                    ৳{product.price.toLocaleString()}
+                                </p>
+                            </Link>
+
+                            <div className="mt-auto flex flex-col sm:flex-row gap-2 w-full">
+                                <Link
+                                    href={`/products/${product.id}`}
+                                    className="w-full text-center bg-transparent border border-[#17171A]/20 text-[#17171A] dark:border-[#F5F4F1]/20 dark:text-[#F5F4F1] font-sans text-xs font-semibold py-2.5 rounded-full transition-colors hover:border-[#17171A] dark:hover:border-[#F5F4F1]"
+                                >
+                                    View Details
+                                </Link>
                                 <button
-                                    onClick={(e) => handleAddToCart(e, product)}
-                                    className="w-full text-center bg-[#17171A] text-[#F5F4F1] dark:bg-[#F5F4F1] dark:text-[#17171A] font-sans text-xs font-semibold py-2.5 rounded-full shadow-md hover:opacity-90 transition-opacity"
+                                    onClick={() => handleAddToCart(product)}
+                                    className="w-full text-center bg-[#17171A] text-[#F5F4F1] dark:bg-[#F5F4F1] dark:text-[#17171A] font-sans text-xs font-semibold py-2.5 rounded-full shadow-md hover:opacity-90 transition-opacity cursor-pointer"
                                 >
                                     Add to Cart
                                 </button>
                             </div>
-                        </Link>
+                        </div>
                     ))
                 ) : (
-                    // Empty Results State
                     <div className="col-span-full py-20 text-center">
                         <p className="text-sm font-medium text-[#17171A]/50 dark:text-[#F5F4F1]/50">No garments match your active filters.</p>
                     </div>

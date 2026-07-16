@@ -4,9 +4,7 @@ import { useEffect } from "react";
 import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { CartDrawerProps } from "@/utils/types/card-props.interface";
-
-
+import { CartDrawerProps } from "@/types/card-props.interface";
 
 export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveItem }: CartDrawerProps) {
     const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -26,7 +24,6 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Background Overlay */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 0.4 }}
@@ -35,7 +32,6 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
                         className="fixed inset-0 z-50 bg-black backdrop-blur-[2px]"
                     />
 
-                    {/* Drawer Panel */}
                     <motion.div
                         initial={{ x: "100%" }}
                         animate={{ x: 0 }}
@@ -43,7 +39,6 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
                         className="fixed bottom-0 right-0 top-0 z-50 flex h-full w-full max-w-md flex-col bg-[#F5F4F1] shadow-2xl dark:bg-[#0F0F10]"
                     >
-                        {/* Header */}
                         <div className="flex items-center justify-between border-b border-neutral-200/60 px-6 py-5 dark:border-neutral-800">
                             <div className="flex items-center gap-2.5">
                                 <ShoppingBag className="h-5 w-5 text-neutral-800 dark:text-neutral-200" />
@@ -53,18 +48,17 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
                             </div>
                             <button
                                 onClick={onClose}
-                                className="rounded-full p-1.5 text-neutral-500 transition-colors hover:bg-neutral-200/60 dark:hover:bg-neutral-900/50"
+                                className="rounded-full cursor-pointer hover:text-red-500 p-1.5 text-neutral-500 transition-colors hover:bg-neutral-200/60 dark:hover:bg-neutral-900/50"
                                 aria-label="Close cart"
                             >
                                 <X className="h-5 w-5" />
                             </button>
                         </div>
 
-                        {/* Cart Items List */}
                         <div className="flex-1 overflow-y-auto px-6 py-4">
                             {items.length === 0 ? (
                                 <div className="flex h-full flex-col items-center justify-center text-center">
-                                    <ShoppingBag className="mb-4 h-12 w-12 stroke-[1] text-neutral-400" />
+                                    <ShoppingBag className="mb-4 h-12 w-12 stroke-1 text-neutral-400" />
                                     <p className="text-sm text-neutral-500">Your shopping bag is empty.</p>
                                 </div>
                             ) : (
@@ -78,9 +72,7 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
                                             exit={{ opacity: 0, scale: 0.95 }}
                                             className="flex gap-4 border-b border-neutral-200/40 pb-5 last:border-0 dark:border-neutral-900"
                                         >
-                                            {/* Product Image */}
                                             <div className="relative h-24 w-18 overflow-hidden rounded bg-neutral-100 dark:bg-neutral-900">
-
                                                 <div className="absolute inset-0 bg-neutral-200 dark:bg-neutral-800 animate-pulse" />
                                                 <Image
                                                     src={item.image}
@@ -92,7 +84,6 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
                                                 />
                                             </div>
 
-                                            {/* Product Details */}
                                             <div className="flex flex-1 flex-col justify-between">
                                                 <div>
                                                     <div className="flex justify-between gap-2">
@@ -100,15 +91,14 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
                                                             {item.name}
                                                         </h3>
                                                         <span className="text-sm font-medium tracking-tight text-neutral-950 dark:text-neutral-50">
-                                                            ${item.price * item.quantity}
+                                                            ৳{(item.price * item.quantity).toLocaleString()}
                                                         </span>
                                                     </div>
                                                     <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
-                                                        {item.color} / Size {item.size}
+                                                        {item.colors} / Size {item.sizes}
                                                     </p>
                                                 </div>
 
-                                                {/* Quantity controls & Delete */}
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex items-center border border-neutral-200/60 bg-white dark:border-neutral-800 dark:bg-black">
                                                         <button
@@ -131,7 +121,7 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
 
                                                     <button
                                                         onClick={() => onRemoveItem(item.id)}
-                                                        className="text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100"
+                                                        className="text-neutral-400 hover:text-red-500 dark:hover:text-red-500 cursor-pointer"
                                                         aria-label="Remove item"
                                                     >
                                                         <Trash2 className="h-4 w-4" />
@@ -144,13 +134,12 @@ export function CartDrawer({ isOpen, onClose, items, onUpdateQuantity, onRemoveI
                             )}
                         </div>
 
-                        {/* Footer / Summary */}
                         {items.length > 0 && (
                             <div className="border-t border-neutral-200/60 bg-white px-6 py-6 dark:border-neutral-800 dark:bg-neutral-950/20">
                                 <div className="flex justify-between mb-4">
                                     <span className="text-sm text-neutral-500 dark:text-neutral-400">Subtotal</span>
                                     <span className="text-base font-semibold tracking-tight text-neutral-950 dark:text-neutral-50">
-                                        ${subtotal.toFixed(2)}
+                                        ৳{subtotal.toLocaleString()}
                                     </span>
                                 </div>
                                 <p className="mb-6 text-xs text-neutral-400">

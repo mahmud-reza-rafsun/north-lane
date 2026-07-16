@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Product } from "@/types/product";
+import { toast } from "sonner";
 
 // Cart Item type extends the base Product with a quantity property
 export interface CartItem extends Product {
@@ -32,7 +34,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         try {
             return JSON.parse(savedCart) as CartItem[];
         } catch (error) {
-            console.error("Failed to parse cart from localStorage", error);
+            toast.error("Failed to parse cart from localStorage");
             return [];
         }
     });

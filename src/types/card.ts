@@ -1,13 +1,13 @@
 // types/cart.ts
-export type CartItem = {
+export interface CartItem {
     id: string;
     name: string;
     price: number;
+    image: string;
+    quantity: number;
     size: string;
     color: string;
-    quantity: number;
-    image: string;
-};
+}
 
 export const INITIAL_CART_ITEMS: CartItem[] = [
     {
