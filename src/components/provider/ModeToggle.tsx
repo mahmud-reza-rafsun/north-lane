@@ -10,7 +10,11 @@ export function ModeToggle() {
     const { theme, setTheme } = useTheme();
 
     useEffect(() => {
-        setMounted(true);
+        const raf = window.requestAnimationFrame(() => {
+            setMounted(true);
+        });
+
+        return () => window.cancelAnimationFrame(raf);
     }, []);
 
     if (!mounted) {
@@ -26,7 +30,7 @@ export function ModeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            className="relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-neutral-200/60 bg-transparent text-neutral-800 transition-colors duration-300 hover:bg-neutral-100 dark:border-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-900/50"
+            className="relative flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-neutral-200 bg-transparent text-neutral-800 transition-colors duration-300 hover:bg-neutral-100 dark:border-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-900/50"
             title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
         >
             {/* Sun Icon */}

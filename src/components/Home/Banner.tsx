@@ -12,6 +12,7 @@ import { Autoplay, EffectFade, Keyboard, A11y } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/effect-fade";
+import Link from "next/link";
 
 const AUTOPLAY_MS = 6000;
 
@@ -81,7 +82,7 @@ export default function Banner() {
         <section
             aria-roledescription="carousel"
             aria-label="Featured collections"
-            className="relative h-[92vh] min-h-[560px] w-full overflow-hidden bg-[#F3F1ED] text-[#17171A] dark:bg-[#0F0F10] dark:text-[#F5F4F1]">
+            className="relative h-[100vh] min-h-[560px] w-full overflow-hidden bg-[#F3F1ED] text-[#17171A] dark:bg-[#0F0F10] dark:text-[#F5F4F1]">
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @keyframes hero-rail-fill {
@@ -97,7 +98,7 @@ export default function Banner() {
                 modules={[Autoplay, EffectFade, Keyboard, A11y]}
                 effect="fade"
                 fadeEffect={{ crossFade: true }}
-                speed={900}
+                speed={700}
                 loop
                 keyboard={{ enabled: true }}
                 autoplay={{ delay: AUTOPLAY_MS, disableOnInteraction: false }}
@@ -141,9 +142,9 @@ export default function Banner() {
                                         {slide.description}
                                     </p>
 
-                                    <a
-                                        href={slide.ctaHref}
-                                        className="group mt-9 inline-flex items-center gap-3 rounded-full bg-[#F5F4F1] px-7 py-3.5
+                                    <Link
+                                        href="/products"
+                                        className="group mt-9 inline-flex items-center cursor-pointer gap-3 rounded-full bg-[#F5F4F1] px-7 py-3.5
                                                    font-[var(--font-body)] text-sm font-semibold uppercase tracking-wide text-[#17171A]
                                                    transition-all duration-300 ease-out hover:gap-4 hover:bg-[#C7A874]
                                                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
@@ -153,7 +154,7 @@ export default function Banner() {
                                         <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">
                                             →
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -164,9 +165,7 @@ export default function Banner() {
             {/* Signature: editorial index rail */}
             <nav
                 aria-label="Choose slide"
-                className="absolute bottom-8 left-6 z-20 flex gap-6 sm:left-10 md:left-16 lg:left-24
-                           md:bottom-10 md:right-auto md:top-1/2 md:left-auto md:right-10 md:-translate-y-1/2
-                           md:flex-col md:gap-5 lg:right-16"
+                className="absolute bottom-8 right-6 z-20 flex gap-4 sm:right-10 md:bottom-10 md:right-16 lg:right-24"
             >
                 {slides.map((slide, i) => {
                     const isActive = i === activeIndex;
@@ -177,12 +176,12 @@ export default function Banner() {
                             onClick={() => goTo(i)}
                             aria-current={isActive ? "true" : undefined}
                             aria-label={`Go to slide ${i + 1}: ${slide.title.replace("\n", " ")}`}
-                            className="group flex items-center gap-2.5 text-left text-white/60 transition-colors duration-300 hover:text-white"
+                            className="group flex items-center gap-2 text-left text-white/60 transition-colors duration-300 hover:text-white"
                         >
                             <span className="font-[var(--font-body)] text-xs tabular-nums">
                                 {String(i + 1).padStart(2, "0")}
                             </span>
-                            <span className="relative h-px w-8 overflow-hidden bg-white/25 sm:w-10 md:w-12">
+                            <span className="relative h-px w-6 overflow-hidden bg-white/25 sm:w-8 md:w-10">
                                 {isActive && (
                                     <span
                                         key={restartKey}
