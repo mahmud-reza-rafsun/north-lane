@@ -8,6 +8,15 @@ import { DUMMY_PRODUCTS } from "@/utils/dummyData";
 import { useCart } from "@/context/CartContext";
 import { toast } from "sonner";
 
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+
 export default function ProductListing() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -85,31 +94,66 @@ export default function ProductListing() {
                     {/* Category Filter */}
                     <div className="relative flex items-center gap-2">
                         <SlidersHorizontal className="h-4 w-4 text-[#17171A]/60 dark:text-[#F5F4F1]/60" />
-                        <select
+                        <Select
                             value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}
-                            className="bg-transparent border border-[#17171A]/20 dark:border-[#F5F4F1]/20 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider focus:outline-none cursor-pointer hover:border-[#17171A] dark:hover:border-[#F5F4F1]"
+                            onValueChange={(val) => {
+                                if (val) setSelectedCategory(val);
+                            }}
                         >
-                            {categories.map((cat) => (
-                                <option key={cat} value={cat} className="bg-[#F3F1ED] dark:bg-[#0F0F10] text-[#17171A] dark:text-[#F5F4F1]">
-                                    {cat}
-                                </option>
-                            ))}
-                        </select>
+                            <SelectTrigger className="w-[180px] bg-transparent border border-[#17171A]/20 dark:border-[#F5F4F1]/20 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider focus:ring-0 focus:ring-offset-0 text-[#17171A] dark:text-[#F5F4F1] hover:border-[#17171A] dark:hover:border-[#F5F4F1] h-auto transition-colors">
+                                <SelectValue placeholder="Category" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-[#F3F1ED] dark:bg-[#1e1e20] border border-[#17171A]/10 dark:border-[#f4f4f5]/10 rounded-2xl shadow-xl p-1">
+                                <SelectGroup>
+                                    {categories.map((cat) => (
+                                        <SelectItem
+                                            key={cat}
+                                            value={cat}
+                                            className="text-xs font-semibold uppercase tracking-wider cursor-pointer rounded-xl px-3 py-2.5 my-0.5 text-[#17171A] dark:text-[#f4f4f5] focus:bg-[#C7A874]/10 focus:text-[#C7A874] data-[selected]:bg-[#C7A874]/10 data-[selected]:text-[#C7A874] transition-colors"
+                                        >
+                                            {cat}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
                     </div>
 
                     {/* Price Sort */}
                     <div className="relative flex items-center gap-2">
                         <ArrowUpDown className="h-4 w-4 text-[#17171A]/60 dark:text-[#F5F4F1]/60" />
-                        <select
+                        <Select
                             value={sortBy}
-                            onChange={(e) => setSortBy(e.target.value)}
-                            className="bg-transparent border border-[#17171A]/20 dark:border-[#F5F4F1]/20 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider focus:outline-none cursor-pointer hover:border-[#17171A] dark:hover:border-[#F5F4F1]"
+                            onValueChange={(val) => {
+                                if (val) setSortBy(val);
+                            }}
                         >
-                            <option value="default" className="bg-[#F3F1ED] dark:bg-[#0F0F10] text-[#17171A] dark:text-[#F5F4F1]">Sort By</option>
-                            <option value="price-low" className="bg-[#F3F1ED] dark:bg-[#0F0F10] text-[#17171A] dark:text-[#F5F4F1]">Price: Low to High</option>
-                            <option value="price-high" className="bg-[#F3F1ED] dark:bg-[#0F0F10] text-[#17171A] dark:text-[#F5F4F1]">Price: High to Low</option>
-                        </select>
+                            <SelectTrigger className="w-[180px] bg-transparent border border-[#17171A]/20 dark:border-[#F5F4F1]/20 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-wider focus:ring-0 focus:ring-offset-0 text-[#17171A] dark:text-[#F5F4F1] hover:border-[#17171A] dark:hover:border-[#F5F4F1] h-auto transition-colors">
+                                <SelectValue placeholder="Sort By" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-[#F3F1ED] dark:bg-[#1e1e20] border border-[#17171A]/10 dark:border-[#f4f4f5]/10 rounded-2xl shadow-xl p-1">
+                                <SelectGroup>
+                                    <SelectItem
+                                        value="default"
+                                        className="text-xs font-semibold uppercase tracking-wider cursor-pointer rounded-xl px-3 py-2.5 my-0.5 text-[#17171A] dark:text-[#f4f4f5] focus:bg-[#C7A874]/10 focus:text-[#C7A874] data-[selected]:bg-[#C7A874]/10 data-[selected]:text-[#C7A874] transition-colors"
+                                    >
+                                        Sort By
+                                    </SelectItem>
+                                    <SelectItem
+                                        value="price-low"
+                                        className="text-xs font-semibold uppercase tracking-wider cursor-pointer rounded-xl px-3 py-2.5 my-0.5 text-[#17171A] dark:text-[#f4f4f5] focus:bg-[#C7A874]/10 focus:text-[#C7A874] data-[selected]:bg-[#C7A874]/10 data-[selected]:text-[#C7A874] transition-colors"
+                                    >
+                                        Price: Low to High
+                                    </SelectItem>
+                                    <SelectItem
+                                        value="price-high"
+                                        className="text-xs font-semibold uppercase tracking-wider cursor-pointer rounded-xl px-3 py-2.5 my-0.5 text-[#17171A] dark:text-[#f4f4f5] focus:bg-[#C7A874]/10 focus:text-[#C7A874] data-[selected]:bg-[#C7A874]/10 data-[selected]:text-[#C7A874] transition-colors"
+                                    >
+                                        Price: High to Low
+                                    </SelectItem>
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
                     </div>
                 </div>
             </div>
