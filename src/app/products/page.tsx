@@ -16,6 +16,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import Image from "next/image";
+import { toast } from "sonner";
 
 export default function ProductListing({ onSelectProduct }: { onSelectProduct: (p: Product) => void }) {
     const [products, setProducts] = useState<Product[]>([]);
@@ -55,6 +56,7 @@ export default function ProductListing({ onSelectProduct }: { onSelectProduct: (
             sizes: [product.sizes?.[0] || "M"],
             colors: [product.colors?.[0] || "Default"]
         });
+        toast.success(`${product.name} added to cart!`);
     };
 
     return (
